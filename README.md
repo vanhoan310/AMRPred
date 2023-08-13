@@ -1,3 +1,4 @@
+# Run Panta in /data/hoan/amromics/pantaPred/ file runme.sh (env amromics)
 # AMRPred
 
 First you need to clone PanPred to this directory.
@@ -14,3 +15,7 @@ pantaOneHotVT10: sequence features of AMR genes, VarianceThreshold = 0.1, one ho
 pantaHighGeneNeighborVT5: sequence features of top 400 high degree genes + neibor, use 3.b notebook v2, VT = 0.05, label encoder
 pantaDifferSite: Count number of different proteins between represenative and the sample, if not in: = 0
 pantaSimSite: Count number of the same proteins between represenative and the sample, if not in: = 0
+
+
+tripleAMR: Use AMR genes + neighbors as feature (like K-mer).
+
