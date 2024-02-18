@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[7]:
-
-
 import os
 import traceback
 import logging
@@ -18,23 +12,6 @@ import re
 import csv
 import shutil
 
-
-# In[1]:
-
-
-# try:
-#     %load_ext autoreload
-#     %autoreload 2
-# except Exception as e:
-#     logging.error(traceback.format_exc())
-
-
-# In[9]:
-
-
-# simversion = '_v01'
-simversion = '_plasmid_v01'
-simversionPangraph = '_assemBiGraph2_v01' 
 # 1 True, 0 False
 run_prokka = 1
 art_simulator = 0
@@ -46,7 +23,8 @@ split_paralogs = 1
 run_multicsar = 0
 run_ragout = 0
 run_pangraph = 1
-pangenome_data = '/data/hoan/amromics/prediction/data/Ecoli1936/'
+# pangenome_data = '/data/hoan/amromics/prediction/data/Ecoli1936/'
+pangenome_data = '/data/hoan/amromics/kover2_paper/data/KpPatric/'
 
 
 # In[10]:
@@ -71,20 +49,22 @@ prokka_dir = pangenome_data + 'prokkaMore'
 os.system('mkdir '+ prokka_dir)
 conda_dir = 'source ~/miniconda3/etc/profile.d/conda.sh && conda activate amromics && '
 if run_prokka:
-    fffile = pangenome_data + '*.fa'
+    fffile = pangenome_data + '*.fna'
+    # fffile = pangenome_data + '*.fa'
     list_database = glob.glob(fffile)
-    for i in range(790, len(list_database)):
+    for i in range(len(list_database)):
         input_data = list_database[i]
         print(input_data)
-        file_name = input_data.split("/")[-1][:-4]
+        file_name = input_data.split("/")[-1][:-4] 
         prokka_bin = conda_dir + 'prokka --outdir ' + output_dir +data_base +' --prefix ' + file_name +' '+input_data
+        # print(prokka_bin)
         os.system(prokka_bin)
         os.system('cp ' + output_dir + '/'+file_name+'.gff ' + prokka_dir)
         os.system('cp ' + output_dir + '/'+file_name+'.fna ' + prokka_dir)
         os.system('cp ' + output_dir + '/'+file_name+'.faa ' + prokka_dir)
         # os.system('cp ' + output_dir + '/'+file_name+'.* ' + prokka_dir)
         os.system('rm -r '+ output_dir)
-        # if i>=1:
+        # if i>=0:
         #     break;
 
 
